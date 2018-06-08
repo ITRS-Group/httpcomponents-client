@@ -30,7 +30,7 @@
     <artifactId>httpcomponents-client</artifactId>
     <version>4.5.3</version>
   </parent>
-  <artifactId>httpclient-win</artifactId>
+  <artifactId>httpclient-win-itrs</artifactId>
   <name>Apache HttpClient Windows features</name>
   <description>
    Apache HttpClient Windows specific functionality
