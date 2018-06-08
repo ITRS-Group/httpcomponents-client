@@ -67,7 +67,9 @@ import com.sun.jna.ptr.IntByReference;
  * @since 4.4
  */
 public class WindowsNegotiateScheme extends AuthSchemeBase {
-
+    // Size of the largest token that will fit in an HTTP header
+    // Used instead of obsolete Sspi.MAX_TOKEN_SIZE
+    private static final int KERBEROS_TOKEN_SIZE = 48*1024;
     private final Log log = LogFactory.getLog(getClass());
 
     // NTLM or Negotiate
@@ -269,7 +271,7 @@ public class WindowsNegotiateScheme extends AuthSchemeBase {
             final String targetName) {
         final IntByReference attr = new IntByReference();
         final SecBufferDesc token = new SecBufferDesc(
-                Sspi.SECBUFFER_TOKEN, Sspi.MAX_TOKEN_SIZE);
+                Sspi.SECBUFFER_TOKEN, KERBEROS_TOKEN_SIZE);
 
         sspiContext = new CtxtHandle();
         final int rc = Secur32.INSTANCE.InitializeSecurityContext(clientCred,
